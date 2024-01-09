@@ -1,2 +1,6 @@
-# web-420
-Into to RESTful API's
+# WEB 420 RESTful APIs
+
+## contributors
+
+*Professor Krasso - Bellevue University
+*Joanna Brumfield - Bellevue University
