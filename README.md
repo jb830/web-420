@@ -2,5 +2,5 @@
 
 ## contributors
 
-*Professor Krasso - Bellevue University
-*Joanna Brumfield - Bellevue University
+* Professor Krasso - Bellevue University
+* Joanna Brumfield - Bellevue University
