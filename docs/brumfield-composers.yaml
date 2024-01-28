@@ -1,0 +1,82 @@
+
+# ============================================
+# ; Title:  brumfield-composers.yaml
+# ; Author: Professor Krasso
+# ; Date: 28, January, 2024
+# ; Modified by: Joanna Brumfield
+# ; Description: Describing an API with an API description format
+# ;===========================================
+
+openapi: 3.0.0
+info:
+  title: Composer API
+  description: Add and Search for Composers
+  version: "1.0"
+servers:
+  - url: http://localhost:3000
+    description: Local server
+paths:
+  /composers:
+    description: Composer List
+    get:
+      summary: Returns a list of composer documents
+      responses:
+        '200': 
+          description: An array of composer names
+          content:
+            application/json:
+              schema: 
+                type: array
+                items: 
+                  type: string
+    post: 
+      summary: Create a new composer
+      requestBody: 
+        required: true
+        description: Add a composer to composer list
+        content: 
+          application/json:
+            schema:
+              required: 
+                - firstName
+                - lastName
+              properties: 
+                firstName:
+                  type: string
+                lastName:
+                  type: string
+      responses:
+        '200':
+          description: Composer was added to composer list
+        '500': 
+          description: Server Exceptions
+        '501':
+          description: MongoDB Exceptions
+  /composers/{id}:
+    description: Returns composer by id
+    get:
+      summary: Returns composer by ID
+      parameters: 
+        - in: path
+          name: id
+          required: true
+          schema: 
+            type: string
+      responses:
+        '200': 
+          description: The composer requested by user 
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties: 
+                  composerId: 
+                    type: string
+                  firstName:
+                    type: string
+                  lastName:
+                    type: string
+        '500': 
+          description: Server Exceptions
+        '501':
+          description: MongoDB Exceptions
