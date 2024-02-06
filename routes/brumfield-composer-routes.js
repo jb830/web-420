@@ -10,15 +10,14 @@
 
 // Add the appropriate requirement statements (express, router, Composer)
 const express = require('express');
-const router = require('express.Router()');
-const Composer = require('../models/brumfield-composers');
+const Composer = require('../models/brumfield-composer');
 
 // Create a variable named router and assign it the express.Router() function. 
 const router = express.Router();
 
 // Create three operations: findAllComposers, findComposerById, createComposer
 
- /** 
+/** 
  * findAllComposers
  * @openapi
  * /api/composers:
@@ -29,34 +28,29 @@ const router = express.Router();
  *     summary: return list of composer documents
  *     responses:
  *       '200':
- *         description: Array of composers
+ *         description: Array of composer names
  *       '500':
  *         description: Server Exception
  *       '501':
  *         description: MongoDB Exception
  */
-router.get('/composers', async (req, res) => {
+router.get('/', async (req, res) => {
     try {
-        Composer.find({}, function (err, composers) {
-            if (err) {
-                console.log(err);
-                res.status(501).send({
-                    'message': `MongoDB Exception: ${err}`
-                })
-            } else {
-                console.log(composers);
-                res.status(200).json(composers);
-            }
-        })
+        const composers = await Composer.find({});
+        res.json(composers);
     } catch (e) {
-        console.log(e);
-        res.status(500).send({
-            'message': `Server Exception: ${e.message}`
-        })
+        if (e) {
+            res.status(501).send({
+                'message': `MongoDB Exception: ${e.message}`
+            });
+        } else {
+            res.status(500).send({
+                'message': `Server Exception: ${e.message}`
+            });
+        }
     }
-})
+});
 
-// findComposerById
 /**
  *  * findComposerById
  * @openapi
@@ -64,7 +58,7 @@ router.get('/composers', async (req, res) => {
  *   get:
  *     tags:
  *       - Composers
- *     description:  API for returning a composer document
+ *     description:   Returns composer by id
  *     summary: returns a composer document
  *     parameters:
  *       - name: id
@@ -83,27 +77,26 @@ router.get('/composers', async (req, res) => {
  *       '501':
  *         description: MongoDB Exception
  */
-router.get('/composers/:id', (req, res) => {
+router.get('/:id', async (req, res) => {
     try {
-        Composer.findById(req.params.id, (err, composer) => {
-            if (err) {
-                console.log(err);
-                res.status(501).send({
-                    'message': `MongoDB Exception: ${err}`
-                });
-            } else if (!composer) {
-                res.status(404).send({
-                    'message': 'Composer not found'
-                });
-            } else {
-                console.log(composer);
-                res.status(200).json(composer);
-            }
-        });
+        const composer = await Composer.findById(req.params.id).exec();
+        if (!composer) {
+            res.status(404).send({
+                'message': 'Composer not found'
+            });
+        } else {
+            res.status(200).json(composer);
+        }
     } catch (e) {
-        res.status(500).send({
-            'message': `Server Exception: ${e.message}`
-        });
+        if (e) {
+            res.status(501).send({
+                'message': `MongoDB Exception: ${e.message}`
+            });
+        } else {
+            res.status(500).send({
+                'message': `Server Exception: ${e.message}`
+            });
+        }
     }
 });
 
@@ -115,9 +108,9 @@ router.get('/composers/:id', (req, res) => {
  *     tags:
  *       - Composers
  *     name: createComposer
- *     summary: Creates a new Composer document
+ *     summary: Create a new composer
  *     requestBody:
- *       description: composer information
+ *       description: Add a composer to composer list
  *       content:
  *         application/json:
  *           schema:
@@ -131,36 +124,36 @@ router.get('/composers/:id', (req, res) => {
  *                 type: string
  *     responses:
  *       '200':
- *         description: Composer added to MongoDB Atlas
+ *         description: Composer was added to composer list
  *       '500':
  *         description: Server Exception
  *       '501':
  *         description: MongoDB Exception
  */
-router.post('/composers', async (req, res) => {
+router.post('/', async (req, res) => {
     try {
         const newComposer = {
             firstName: req.body.firstName,
             lastName: req.body.lastName
         }
+        const composer = await Composer.create(newComposer)
+        console.log(composer);
+        res.status(200).json(composer)
 
-        await Composer.create(newComposer, function (err, composer) {
-            if (err) {
-                console.log(err);
-                res.status(500).send({
-                    'message': `MongoDB Exception: ${err}`
-                })
-            } else {
-                console.log(composer);
-                res.json(composer)
-            }
-        })
     } catch (e) {
-        console.log(e);
-        res.status(500).send({
-            'message': `Server Exception: ${e.message}`
-        })
+        if (e) {
+            console.log(e);
+            res.status(500).send({
+                'message': `Server Exception: ${e.message}`
+            })
+        } else {
+            console.log(err);
+            res.status(501).send({
+                'message': `MongoDB Exception: ${e.message}`
+            })
+        }
     }
 })
+
 
 module.exports = router;

@@ -64,7 +64,7 @@ paths:
             type: string
       responses:
         '200': 
-          description: The composer requested by user 
+          description: The composer document requested by user 
           content:
             application/json:
               schema: 
