@@ -1,0 +1,21 @@
+{
+    "person": [
+        {
+            "firstName": "name",
+            "lastName": "name",
+            "birthDate": "1111/01/01",
+            "roles": [
+                {
+                    "text": "some text"
+                }
+            ],
+            "dependents": [
+                {
+                    "firstName": "name",
+                    "lastName": "name"
+                }
+            ]
+        }
+    ]
+}
+

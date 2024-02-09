@@ -14,6 +14,7 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerJsdoc = require('swagger-jsdoc');
 const mongoose = require('mongoose');
 const composerRoutes = require('./routes/brumfield-composer-routes');
+const personRoutes = require('./routes/brumfield-person-routes');
 
 //•	Create a new variable named app and assign it to express library (refer back to the solutions you built in web-340, if you need refresher). 
 const app = express();
@@ -36,11 +37,13 @@ const options = {
       version: '1.0.0',
     },
   },
-  apis: ['./routes/brumfield-composer-routes.js'],
+  apis: ['./routes/brumfield-composer-routes.js', './routes/brumfield-person-routes.js'],
+        
 };
 
-//Route set up for composer 
+//Route set up for composer & person 
 app.use('/api/composers', composerRoutes);
+app.use('/api/people', personRoutes);
 
 //Create a new variable name openapiSpecification and call the swaggerJsdoc library using the options object literal.  For example, const openapiSpecification = swaggerJsdoc(options);
 

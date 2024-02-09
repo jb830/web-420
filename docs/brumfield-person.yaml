@@ -1,0 +1,72 @@
+
+# ============================================
+# ; Title:  brumfield-people.yaml
+# ; Author: Professor Krasso
+# ; Date: 7, February, 2024
+# ; Modified by: Joanna Brumfield
+# ; Description: Describing an API with an API description format
+# ;===========================================
+
+openapi: 3.0.0
+info:
+  title: Person API
+  description: Add and Search for Persons
+  version: "1.0"
+servers:
+  - url: http://localhost:3000
+    description: Local server
+paths:
+  /people:
+    description: People List
+    get:
+      summary: Returns a list of person documents
+      responses:
+        '200': 
+          description: An array of person objects
+          content:
+            application/json:
+              schema: 
+                type: object
+                items: 
+                  type: string
+    post: 
+      summary: Create a new person
+      requestBody: 
+        required: true
+        description: Add a person to person list
+        content: 
+          application/json:
+            schema:
+              required: 
+                - firstName
+                - lastName
+              properties: 
+                firstName:
+                  type: string
+                lastName:
+                  type: string
+                birthDate:
+                  type: string
+                roles:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      text:
+                        type: string
+                dependents:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      firstName:
+                        type: string
+                      lastName:
+                        type: string                  
+      responses:
+        '200':
+          description: People was added to people list
+        '500': 
+          description: Server Exceptions
+        '501':
+          description: MongoDB Exceptions
