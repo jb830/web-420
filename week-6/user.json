@@ -1,0 +1,8 @@
+{
+"userName" : "uniqueName",
+"password" : "strongPassword",
+"emailAddress" : [
+    "example@emample.com", 
+    "anotherexample@example.com"
+    ]
+}
