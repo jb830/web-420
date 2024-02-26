@@ -16,6 +16,7 @@ const mongoose = require('mongoose');
 const composerRoutes = require('./routes/brumfield-composer-routes');
 const personRoutes = require('./routes/brumfield-person-routes');
 const sessionRoutes = require('./routes/brumfield-session-routes');
+const nodeShopperRoutes = require('./routes/brumfield-node-shopper-routes');
 
 //•	Create a new variable named app and assign it to express library (refer back to the solutions you built in web-340, if you need refresher). 
 const app = express();
@@ -38,7 +39,7 @@ const options = {
       version: '1.0.0',
     },
   },
-  apis: ['./routes/brumfield-composer-routes.js', './routes/brumfield-person-routes.js', './routes/brumfield-session-routes.js'],
+  apis: ['./routes/brumfield-composer-routes.js', './routes/brumfield-person-routes.js', './routes/brumfield-session-routes.js', './routes/brumfield-node-shopper-routes.js'],
         
 };
 
@@ -46,6 +47,7 @@ const options = {
 app.use('/api/composers', composerRoutes);
 app.use('/api/people', personRoutes);
 app.use('/api/users', sessionRoutes);
+app.use('/api/customers', nodeShopperRoutes);
 
 //Create a new variable name openapiSpecification and call the swaggerJsdoc library using the options object literal.  For example, const openapiSpecification = swaggerJsdoc(options);
 
@@ -67,4 +69,4 @@ db.once('open', function () {
 //Finally, use the http library to create a new server that listens on the port you set (port 3000).  In the body of the createServer() function add a console.log() statement that says, “Application started and listening on port <portNumber>.”
 http.createServer(app).listen(app.get('port'), function() {
   console.log(`Application started and listening on port ${app.get('port')}`);
-})
+});

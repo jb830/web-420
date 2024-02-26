@@ -1,0 +1,31 @@
+{
+    "firstName": "John",
+    "lastName": "Doe",
+    "userName": "johndoe123",
+    "invoices": [
+      {
+        "subtotal": 13.90,
+        "tax": 0.91,
+        "dateCreated": "10-02-2024",
+        "dateShipped": "13-02-2024",
+        "lineItems": [
+          {
+            "name": "And Then There Were None By Agatha Christie",
+            "price": 12.99,
+            "quantity": 1
+          }
+        ]
+      }
+    ],
+    
+    "username": "jane123",
+    "subtotal": 9.0,
+    "tax": 0.9,
+    "dateCreated": "01-02-2024",
+    "dateShipped": "04-02-2024",
+    "items": {
+      "name": "A Book by Author",
+      "price": 9.90,
+      "quantity": 1
+    }
+  }

@@ -128,7 +128,7 @@ router.post('/login', async (req, res) => {
         //check if username exists
         if (user) {
             //if username exists check if password matches 
-            bcrypt.compare(req.body.password, user.password, function (err, passwordIsValid) {
+            bcrypt.compare(req.body.password, user.password, (err, passwordIsValid) => {
                 if (err) {
                     console.log(err);
                     return res.status(501).send({
