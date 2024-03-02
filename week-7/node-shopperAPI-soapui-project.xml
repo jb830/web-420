@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="856fa013-6015-41ba-9d18-76fe8d807216" activeEnvironment="Default" name="node-shopperAPI" soapui-version="5.7.2" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:RestService" id="356b0257-daf0-40b7-96a5-07e0d6764ce2" wadlVersion="http://wadl.dev.java.net/2009/02" name="http://localhost:3000" type="rest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart=""/><con:endpoints><con:endpoint>http://localhost:3000</con:endpoint></con:endpoints><con:resource name="invoices" path="/api/customers/{john123}/invoices" id="442af86e-dee0-4e55-bdb4-5f73609fc8a5"><con:settings/><con:parameters><con:parameter><con:name>john123</con:name><con:value>john123</con:value><con:style>TEMPLATE</con:style><con:default>john123</con:default></con:parameter></con:parameters><con:method name="Method 1" id="9808477f-785d-4673-bd5d-a568ee275d6d" method="GET"><con:settings/><con:parameters/><con:representation type="RESPONSE"><con:mediaType>application/json; charset=utf-8</con:mediaType><con:status>200</con:status><con:params/><con:element xmlns:inv="http://localhost/api/customers/john123/invoices">inv:Response</con:element></con:representation><con:representation type="REQUEST"><con:mediaType>application/json</con:mediaType><con:params/></con:representation><con:request name="Request 1" id="18192ec4-f605-4ec5-9d3e-79b358a8993c" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://localhost:3000</con:endpoint><con:request>{
+  "subtotal": 100,
+  "tax": 20,
+  "dateCreated": "2024-02-02T17:41:24.732Z",
+  "dateShipped": "2024-02-05T10:00:00.000Z",
+  "lineItems": [
+    {
+      "name": "Item 1",
+      "price": 50,
+      "quantity": 2
+    }
+  ]
+}</con:request><con:originalUri>http://localhost/api/customers/john123/invoices</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource></con:interface><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:sensitiveInformation/></con:soapui-project>
